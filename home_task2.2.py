@@ -95,3 +95,5 @@ class Student:
         self.coins += 3.5
         self.gladness -= 1
 
+
+
