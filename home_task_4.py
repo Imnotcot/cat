@@ -3,19 +3,11 @@ result = []
 
 def problemsindict(*args): #Це трішки епічно
     dictionary = {}
-    for i in range(1, len(args), 2):
-        if not type(args[i]) == list and not type(args[i - 1]) == list:
-            dictionary.update([(args[i - 1], args[i])])
+    for i in range(len(args)):
+        if not type(args[i][0]) == list:
+            dictionary.update([(args[i][0], args[i][1])])
         else:
-            if type(args[i]) == list:
-                element1 = str(args[i])
-            else:
-                element1 = args[i]
-            if type(args[i - 1]) == list:
-                element2 = str(args[i - 1])
-            else:
-                element2 = args[i - 1]
-            dictionary.update([(element2, element1)])
+            dictionary.update([(str(args[i][0]), args[i][1])])
     return dictionary
 
 
@@ -30,7 +22,7 @@ def divider(a, b):
         return exc
 
 
-data = problemsindict(10, 2, 2, 5, "123", 4, 18, 0, [], 15, 8, 4)
+data = problemsindict([10, 2], [2, 5], ["123", 4], [18, 0], [[], 15], [8, 4])
 
 for key in data:
     try:
