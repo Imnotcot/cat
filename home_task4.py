@@ -45,11 +45,11 @@ class Player(Object, Walking):
 
     def asking(self):
         asking = input(f'Wasd for walk, and q for squat: ')
-        self.msquat1(press_q=asking == 'q')
-        self.keys_to_move(press_key=asking)
-        self.printing()
+        self.__msquat1(press_q=asking == 'q')
+        self.__keys_to_move(press_key=asking)
+        self.__printing()
 
-    def msquat1(self, press_q):
+    def __msquat1(self, press_q):
         if press_q:
             self.fsquat = not self.fsquat
 
@@ -58,7 +58,7 @@ class Player(Object, Walking):
         else:
             self.fast = 1
 
-    def keys_to_move(self, press_key):
+    def __keys_to_move(self, press_key):
         if press_key == 'w':
             self.move(move_by_y=1)
         elif press_key == 's':
@@ -68,7 +68,7 @@ class Player(Object, Walking):
         elif press_key == 'd':
             self.move(move_by_x=1)
 
-    def printing(self):
+    def __printing(self):
         print(f'My x in {self.x}, and my y in {self.y}')
         print(f'{"":=^100}')
         for i in range(10):
@@ -97,7 +97,6 @@ class Enemys(Object, Walking):
 
         dict_with_enemy.update([(self.NAME, [self.x, self.y])])
 
-
     def moving(self):
         self.move(random.randint(-1, 1), random.randint(-1, 1))
         dict_with_enemy.update([(self.NAME, [self.x, self.y])])
@@ -116,6 +115,7 @@ class Structures(Object): #Структури відрізняються від 
 
         dict_with_structure.update([(self.name, [self.x, self.y])])
         self.name = None
+
 
 player = Player()
 print('Керування за допомогою букв wasd й q щоб присісти або навпаки')
