@@ -14,13 +14,13 @@ class Walking:
         self.fast = 1
 
     def move(self, move_by_x=0, move_by_y=0):
-        self._move_by_x(move_by_x)
-        self._move_by_y(move_by_y)
+        self.__move_by_x(move_by_x)
+        self.__move_by_y(move_by_y)
 
-    def _move_by_x(self, direct):
+    def __move_by_x(self, direct):
         self.x += direct*self.fast
 
-    def _move_by_y(self, direct):
+    def __move_by_y(self, direct):
         self.y += direct*self.fast
 
 #================================================================================
@@ -29,6 +29,9 @@ class Player(Object, Walking):
     def __init__(self):
         super().__init__()
         self.fsquat = False
+        self.__show_my_cordinats = False
+        self.__show_enemys_cordinats = False
+        self.__show_structures_codinats = False
 
 
     def n_asking(self):
@@ -60,8 +63,14 @@ class Player(Object, Walking):
 
     def __another_keys(self, press_key):
         if press_key == 'k':
-            print(f'Ваші кординати: x - {self.x}, y - {self.y}')
+            self.__show_my_cordinats = not self.__show_my_cordinats
         elif press_key == '1':
+            self.__show_enemys_cordinats = not self.__show_enemys_cordinats
+        elif press_key == '3':
+            self.__show_structures_codinats = not self.__show_structures_codinats
+        if self.__show_my_cordinats:
+            print(f'Ваші кординати: x - {self.x}, y - {self.y}')
+        if self.__show_enemys_cordinats:
             veleus = ''
             for i in range(10):
                 veleus += f'{list(system.dict_with_enemy.values())[i][0]}, {list(system.dict_with_enemy.values())[i][1]}'
@@ -70,7 +79,7 @@ class Player(Object, Walking):
                 else:
                     veleus += '.'
             print(f'Список кординат enemys`: {veleus}')
-        elif press_key == '3':
+        if self.__show_structures_codinats:
             veleus = ''
             for i in range(10):
                 veleus += f'{list(system.dict_with_structure.values())[i][0]}, {list(system.dict_with_structure.values())[i][1]}'
@@ -88,8 +97,6 @@ class Player(Object, Walking):
 class Enemys(Object, Walking):
     def __init__(self):
         super().__init__()
-        global system
-        self.fast = 1
         if list(system.dict_with_enemy) == []: #Я пробував if list(dict_with_enemy): але це не спрацювало
             self.NAME = 'enemy1'
         else:
@@ -146,6 +153,7 @@ class System:
         print('Щоб побачити свої кординати натисніть k.')
         print('Щоб побачити кординати об`єктів з ім`ям enemy натисніть 1.')
         print('Щоб побачити список кординат з структурами натисніть 3.')
+        print('Щоб вийти будете водити e')
         input('Натисніть Enter щоб продовжити.')
         while 1:
             for element in self.list_with_enemy:
