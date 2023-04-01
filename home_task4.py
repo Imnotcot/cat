@@ -169,8 +169,8 @@ class System:
         x = -2
         y = 2
         for i in range(25):
-            self.list_with_text[i]['x'] = self.player.x + x
-            self.list_with_text[i]['y'] = self.player.y + y
+            self.list_with_text[i]['x'] = int(round(self.player.x, 0)) + x
+            self.list_with_text[i]['y'] = int(round(self.player.y, 0)) + y
             if x == 2:
                 x = -2
                 y -= 1
@@ -179,7 +179,7 @@ class System:
 
     def __printing(self):
         for i in range(25):
-            if self.list_with_text[i]['x'] == self.player.x and self.list_with_text[i]['y'] == self.player.y:
+            if self.list_with_text[i]['x'] == round(self.player.x) and self.list_with_text[i]['y'] == round(self.player.y):
                 if self.list_with_text[i]['objects'] == [' ']:
                     self.list_with_text[i]['objects'] = []
                 self.list_with_text[i]['objects'].append('P')
