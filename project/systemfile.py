@@ -1,5 +1,6 @@
 import pygame
 
+pygame.init()
 
 class System:
     def __init__(self):
@@ -13,8 +14,27 @@ class System:
         pygame.display.set_caption('Shooter')
         self.clock = pygame.time.Clock()
 
-    def create(self):
+    def init(self):
         self.backgroud = Background()
+        self.paint = Painter()
+
+
+class Painter:
+    def enemy_shoots(self):
+        for element in system.shoot.Eshoots:
+            element.moving()
+            system.screen.blit(element.SURF, (element.x, element.y))
+
+    def player_shoots(self):
+        for element in system.shoot.Pshoots:
+            element.moving()
+            system.screen.blit(element.SURF, (element.x, element.y))
+
+    def enemys(self):
+        for element in system.enemys:
+            element.move()
+            print(element.surf)
+            system.screen.blit(element.surf, (element.x, element.y))
 
 
 class Background:
@@ -23,6 +43,10 @@ class Background:
 
 
 system = System()
-system.create()
+system.init()
+
 import playerfile
 import shootfile
+import enemyfile
+
+system.enemys.append(enemyfile.Enemy())

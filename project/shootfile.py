@@ -1,7 +1,9 @@
 import systemfile
 import playerfile
+import enemyfile
 import pygame
 
+pygame.init()
 
 class Shoot:
     def __init__(self):
@@ -37,6 +39,14 @@ class Player_shoot(Shoot):
 
     def delete(self):
         systemfile.system.shoot.Pshoots.remove(self)
+
+
+class Enemy_shoot(Shoot):
+    def __init__(self, x, y, dir):
+        self.init(x, y, dir)
+
+    def delete(self):
+        systemfile.system.shoot.Eshoots.remove(self)
 
 
 systemfile.system.shoot = Shoot()
